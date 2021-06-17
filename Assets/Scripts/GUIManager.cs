@@ -2,10 +2,20 @@ using UnityEngine;
 
 public class GUIManager : MonoBehaviour
 {
+    public enum Screen
+    {
+        Main,
+        InGame,
+        Pause,
+        Fail
+    }
+
     public GameObject main;
     public GameObject inGame;
     public GameObject pause;
     public GameObject fail;
+    public Screen activeScreen = Screen.Main;
+    public int lastScreen;
     public static GUIManager Instance { get; private set; }
 
     private void Awake()
@@ -32,32 +42,39 @@ public class GUIManager : MonoBehaviour
 
     public void ShowMain()
     {
+        activeScreen = Screen.Main;
         main.SetActive(true);
         inGame.SetActive(false);
         pause.SetActive(false);
         fail.SetActive(false);
+        lastScreen = 2;
+        GameManager.Instance.PauseGame();
     }
-    
+
     public void ShowPause()
     {
+        activeScreen = Screen.Pause;
         main.SetActive(false);
         inGame.SetActive(true);
         pause.SetActive(true);
         fail.SetActive(false);
         GameManager.Instance.PauseGame();
     }
-    
+
     public void ShowResume()
     {
+        activeScreen = Screen.InGame;
         main.SetActive(false);
         inGame.SetActive(true);
         pause.SetActive(false);
         fail.SetActive(false);
+        lastScreen = 2;
         GameManager.Instance.ResumeGame();
     }
-    
+
     public void ShowFail()
     {
+        activeScreen = Screen.Fail;
         main.SetActive(false);
         inGame.SetActive(true);
         pause.SetActive(false);
