@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public float left = -8.5f;
+    public float right = 8.5f;
     public bool isPaused;
     public bool isSoundActive;
     public bool isVibrationActive;

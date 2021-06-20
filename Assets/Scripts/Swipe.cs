@@ -25,6 +25,8 @@ public class Swipe : MonoBehaviour
             return;
         }
 
+        rb.velocity = new Vector3(0, 0, 20f);
+
 #if UNITY_EDITOR
         if (!fingerDown && Input.GetMouseButtonDown(0))
         {
@@ -79,16 +81,17 @@ public class Swipe : MonoBehaviour
     {
         if (GameManager.Instance.isPaused) return;
 
-        rb.AddForce(0, 0, 0.3f, ForceMode.Impulse);
+        //rb.AddForce(0, 0, 0.3f, ForceMode.Impulse);
+        rb.velocity = new Vector3(0, 0, 20f);
     }
 
     private IEnumerator Move(int direction)
     {
         var error = false;
-        if (transform.position.x < -6.0f && direction == 0) error = true;
-        else if (transform.position.x > 6.0f && direction == 1) error = true;
+        if (transform.position.x < GameManager.Instance.left + 0.50f && direction == 0) error = true;
+        else if (transform.position.x > GameManager.Instance.right - 0.50f && direction == 1) error = true;
         if (error) yield break;
-        var direct = direction == 0 ? -6.50f : 6.50f;
+        var direct = direction == 0 ? GameManager.Instance.left : GameManager.Instance.right;
         changeTime = 0f;
         var startShip = transform.position.x;
 
