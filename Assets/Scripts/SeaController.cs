@@ -7,7 +7,7 @@ public class SeaController : MonoBehaviour
         if (other.gameObject.CompareTag("Ship"))
         {
             transform.position += new Vector3(0, 0, transform.GetChild(0).GetComponent<Renderer>().bounds.size.z * 5);
-            gameObject.GetComponent<SeaObstacles>().RespawnObstacles();
+            gameObject.GetComponent<ObstaclesSpawner>().RespawnObstacles();
         }
     }
 }

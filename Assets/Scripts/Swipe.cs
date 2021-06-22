@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -102,6 +103,14 @@ public class Swipe : MonoBehaviour
                 transform.position.y, transform.position.z);
 
             yield return null;
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.CompareTag("Obstacle"))
+        {
+            Debug.Log("öldün");
         }
     }
 }

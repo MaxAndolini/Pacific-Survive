@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 1616403049784678378}
   - component: {fileID: 1616403049784678379}
   - component: {fileID: 1616403049784678388}
-  - component: {fileID: 842511599}
+  - component: {fileID: 1616403049501161446}
   m_Layer: 0
   m_Name: Sea 1
   m_TagString: Untagged
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b7643210869ba140b41d8e68234cd8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &842511599
+--- !u!114 &1616403049501161446
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,38 +170,50 @@ MonoBehaviour:
   m_GameObject: {fileID: 1616403049784678377}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c667a333b8fdb9548be3404cd3b7f69c, type: 3}
+  m_Script: {fileID: 11500000, guid: 34d3e35cc858c494f9d47734cd76e164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  first: 0
   obstacles:
-  - obsObject: {fileID: 2196165387549361510, guid: 37bd444577d32e7489b0e7f1fe1110e8, type: 3}
+  - obsObject: {fileID: 6469163812972862175, guid: 18c068a05ac4ff444838aa02b295fff4, type: 3}
     side: 0
-    sideTo: -1
-    length: 0
-  - obsObject: {fileID: 2970005036357417496, guid: bc651fc90f3d0124c9f1abd9349cbb69, type: 3}
+    length: 0000000001000000
+  - obsObject: {fileID: 6386733766203037469, guid: 75063e87f0b527149be3ee20f959f795, type: 3}
+    side: 2
+    length: 0100000002000000
+  - obsObject: {fileID: 7747317448215154102, guid: fb1742afd9d1cc8498d042217bb8cc18, type: 3}
     side: 0
-    sideTo: 1
-    length: 0
-  - obsObject: {fileID: 4360002421833719332, guid: 75e80fea3fc4f684b9725a7077077f7d, type: 3}
+    length: 00000000
+  - obsObject: {fileID: 8306857350871510491, guid: a5834bb0fabc43f41854c616b8fc48e6, type: 3}
     side: 1
-    sideTo: -1
-    length: 0
-  - obsObject: {fileID: 2884713637897340207, guid: 22be063c14e47254596502c135b03240, type: 3}
-    side: 1
-    sideTo: 0
-    length: 0
-  - obsObject: {fileID: 2970005036357417496, guid: e6e518f4826769145a49f6149fefdfb3, type: 3}
-    side: 1
-    sideTo: 2
-    length: 0
-  - obsObject: {fileID: 2884713637897340207, guid: d49e8491a6606544f80e309cb3bc2973, type: 3}
+    length: 01000000
+  - obsObject: {fileID: 4431396848646751350, guid: f7006c03072dd8f4899a67af98b960cd, type: 3}
+    side: 0
+    length: 0000000001000000
+  - obsObject: {fileID: 2939210445160251315, guid: 7dd36b35fa91a464bb5a4ade67b2b4d1, type: 3}
     side: 2
-    sideTo: -1
-    length: 0
-  - obsObject: {fileID: 2884713637897340207, guid: 54d7ad2a88dcd4b41a68e43f10531c22, type: 3}
+    length: 0100000002000000
+  - obsObject: {fileID: 3648314274713262513, guid: 74177e0333009e3438922778378ab1f6, type: 3}
+    side: 0
+    length: 0000000001000000
+  - obsObject: {fileID: 7211436017310112676, guid: 17cfbe482cc33144dab4249548525891, type: 3}
+    side: 0
+    length: 0000000001000000
+  - obsObject: {fileID: 4638534228299843217, guid: 2d42bf9f3c9be1b408e6ad1da47a1be6, type: 3}
     side: 2
-    sideTo: 1
-    length: 0
+    length: 0100000002000000
+  - obsObject: {fileID: 8602281835544123625, guid: 7a6fb064f04ab284a85dac98267e170d, type: 3}
+    side: 2
+    length: 0100000002000000
+  - obsObject: {fileID: 5055264619338226978, guid: f3db2e8e62718874897208b5120a17f7, type: 3}
+    side: 0
+    length: 00000000
+  - obsObject: {fileID: 697514545246370208, guid: be9534c6802811044a018921cb967151, type: 3}
+    side: 1
+    length: 01000000
+  - obsObject: {fileID: 7139866593521653250, guid: e7d046f236a884646953d931c6a75aa3, type: 3}
+    side: 2
+    length: 02000000
 --- !u!1001 &1616403048010236791
 PrefabInstance:
   m_ObjectHideFlags: 0
