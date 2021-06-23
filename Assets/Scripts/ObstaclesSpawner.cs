@@ -17,44 +17,48 @@ public class ObstaclesSpawner : MonoBehaviour
 
     private void SpawnObstacle()
     {
-        GameObject obsObj;
+        while (true)
+        {
+            GameObject obsObj;
 
-        if (_lastObject == -1)
-        {
-            var obsObjRandom = Random.Range(0, obstacles.Count);
-            obsObj = obstacles[obsObjRandom].ObsObject;
-            _lastObject = obsObjRandom;
-        }
-        else
-        {
-            obsObj = GiveObject();
-        }
-
-        if (obsObj != null)
-        {
-            var emptyRandom = Random.Range(0, 100);
-            if (emptyRandom > 30)
+            if (_lastObject == -1)
             {
-                var position = obsObj.transform.position;
-                var temp = Instantiate(obsObj,
-                    new Vector3(position.x, position.y,
-                        transform.position.z + _startPos), Quaternion.identity);
-                _obs.Add(temp);
+                var obsObjRandom = Random.Range(0, obstacles.Count);
+                obsObj = obstacles[obsObjRandom].ObsObject;
+                _lastObject = obsObjRandom;
+            }
+            else
+            {
+                obsObj = GiveObject();
+            }
+
+            if (obsObj != null)
+            {
+                var emptyRandom = Random.Range(0, 100);
+                if (emptyRandom > 30)
+                {
+                    var position = obsObj.transform.position;
+                    var temp = Instantiate(obsObj,
+                        new Vector3(position.x, position.y, transform.position.z + _startPos), Quaternion.identity);
+                    _obs.Add(temp);
+                }
+                else
+                {
+                    _lastObject = -1;
+                }
             }
             else
             {
                 _lastObject = -1;
             }
-        }
-        else
-        {
-            _lastObject = -1;
-        }
 
-        if (_startPos < 120f)
-        {
-            _startPos += 10f;
-            SpawnObstacle();
+            if (_startPos < 120f)
+            {
+                _startPos += 13f;
+                continue;
+            }
+
+            break;
         }
     }
 
@@ -64,7 +68,7 @@ public class ObstaclesSpawner : MonoBehaviour
             Destroy(o);
 
         _obs.Clear();
-        _startPos = -10f;
+        _lastObject = -1;
         Spawn();
     }
 
@@ -72,12 +76,12 @@ public class ObstaclesSpawner : MonoBehaviour
     {
         if (first)
         {
-            _startPos = 30f;
+            _startPos = 29f;
             first = false;
         }
         else
         {
-            _startPos = -20f;
+            _startPos = -10f;
         }
 
         SpawnObstacle();

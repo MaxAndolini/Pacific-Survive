@@ -27,22 +27,9 @@ public class GameManager : MonoBehaviour
         GUIManager.Instance.ShowMain();
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-#if UNITY_EDITOR
-        if (GUIManager.Instance.activeScreen == GUIManager.Screen.Main && Input.GetMouseButtonDown(0))
-            GUIManager.Instance.ShowResume();
-#else
-        if (GUIManager.Instance.activeScreen == GUIManager.Screen.Main && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            GUIManager.Instance.ShowResume();
-        }
-#endif
-    }
-
     public void StartGame()
     {
+        GUIManager.Instance.ShowResume();
     }
 
     public void PauseGame()
@@ -59,7 +46,6 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        
     }
 
     public void ChangeSound()

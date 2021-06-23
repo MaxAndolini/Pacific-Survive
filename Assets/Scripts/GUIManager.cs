@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GUIManager : MonoBehaviour
 {
@@ -14,8 +15,10 @@ public class GUIManager : MonoBehaviour
     public GameObject inGame;
     public GameObject pause;
     public GameObject fail;
+    public GameObject credits;
     public Screen activeScreen = Screen.Main;
     public int lastScreen;
+    public bool creditsActive;
     public static GUIManager Instance { get; private set; }
 
     private void Awake()
@@ -56,6 +59,7 @@ public class GUIManager : MonoBehaviour
         activeScreen = Screen.Pause;
         main.SetActive(false);
         inGame.SetActive(true);
+        inGame.transform.GetChild(1).gameObject.SetActive(false);
         pause.SetActive(true);
         fail.SetActive(false);
         GameManager.Instance.PauseGame();
@@ -66,6 +70,7 @@ public class GUIManager : MonoBehaviour
         activeScreen = Screen.InGame;
         main.SetActive(false);
         inGame.SetActive(true);
+        inGame.transform.GetChild(1).gameObject.SetActive(true);
         pause.SetActive(false);
         fail.SetActive(false);
         lastScreen = 2;
@@ -80,5 +85,17 @@ public class GUIManager : MonoBehaviour
         pause.SetActive(false);
         fail.SetActive(true);
         GameManager.Instance.PauseGame();
+    }
+
+    private void ShowCredits()
+    {
+        creditsActive = !creditsActive;
+        for (var i = 0; i < main.transform.childCount; i++)
+            if (main.transform.GetChild(i).name != "Credits" &&
+                main.transform.GetChild(i).GetComponent<Button>() != null)
+            {
+                main.transform.GetChild(i).GetComponent<Button>().enabled = !creditsActive;
+                credits.SetActive(creditsActive);
+            }
     }
 }
