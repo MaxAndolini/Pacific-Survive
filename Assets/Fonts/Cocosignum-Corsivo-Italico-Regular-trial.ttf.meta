@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: ac66820c2a515d84a828847880d6eac2
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Cocosignum Corsivo Italico
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 497fac5bd15574244ad53a326ed153d9, type: 3}
+  - {fileID: 12800000, guid: 22df020a8e0433e44b489be1943687ac, type: 3}
+  - {fileID: 12800000, guid: 17c0f6eaec21e4e498e490517340660b, type: 3}
+  - {fileID: 12800000, guid: 62ab910d49b9f5649985c75519a89b2c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

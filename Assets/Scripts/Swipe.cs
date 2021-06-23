@@ -5,15 +5,15 @@ using UnityEngine;
 public class Swipe : MonoBehaviour
 {
     public int pixelDistance = 20;
-    private readonly float changeDuration = 0.1f;
-    private float changeTime;
-    private bool fingerDown;
-    private Rigidbody rb;
-    private Vector2 start;
+    private const float ChangeDuration = 0.1f;
+    private float _changeTime;
+    private bool _fingerDown;
+    private Rigidbody _rb;
+    private Vector2 _start;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -22,37 +22,37 @@ public class Swipe : MonoBehaviour
         if (GUIManager.Instance.lastScreen > 0)
         {
             GUIManager.Instance.lastScreen--;
-            fingerDown = false;
+            _fingerDown = false;
             return;
         }
 
-        rb.velocity = new Vector3(0, 0, 20f);
+        _rb.velocity = new Vector3(0, 0, 20f);
 
 #if UNITY_EDITOR
-        if (!fingerDown && Input.GetMouseButtonDown(0))
+        if (!_fingerDown && Input.GetMouseButtonDown(0))
         {
-            start = Input.mousePosition;
-            fingerDown = true;
+            _start = Input.mousePosition;
+            _fingerDown = true;
         }
 
-        if (fingerDown)
+        if (_fingerDown)
         {
-            if (Input.mousePosition.x <= start.x - pixelDistance)
+            if (Input.mousePosition.x <= _start.x - pixelDistance)
             {
-                fingerDown = false;
+                _fingerDown = false;
                 Debug.Log("Swipe left");
                 StartCoroutine(Move(0));
             }
-            else if (Input.mousePosition.x >= start.x + pixelDistance)
+            else if (Input.mousePosition.x >= _start.x + pixelDistance)
             {
-                fingerDown = false;
+                _fingerDown = false;
                 Debug.Log("Swipe right");
                 StartCoroutine(Move(1));
             }
         }
 
-        if (fingerDown && Input.GetMouseButtonUp(0))
-            fingerDown = false;
+        if (_fingerDown && Input.GetMouseButtonUp(0))
+            _fingerDown = false;
 #else
         if (!fingerDown && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
@@ -83,7 +83,7 @@ public class Swipe : MonoBehaviour
         if (GameManager.Instance.isPaused) return;
 
         //rb.AddForce(0, 0, 0.3f, ForceMode.Impulse);
-        rb.velocity = new Vector3(0, 0, 20f);
+        _rb.velocity = new Vector3(0, 0, 20f);
     }
 
     private IEnumerator Move(int direction)
@@ -93,13 +93,13 @@ public class Swipe : MonoBehaviour
         else if (transform.position.x > GameManager.Instance.right - 0.50f && direction == 1) error = true;
         if (error) yield break;
         var direct = direction == 0 ? GameManager.Instance.left : GameManager.Instance.right;
-        changeTime = 0f;
+        _changeTime = 0f;
         var startShip = transform.position.x;
 
-        while (changeTime < changeDuration)
+        while (_changeTime < ChangeDuration)
         {
-            changeTime += Time.deltaTime;
-            transform.position = new Vector3(Mathf.Lerp(startShip, startShip + direct, changeTime / changeDuration),
+            _changeTime += Time.deltaTime;
+            transform.position = new Vector3(Mathf.Lerp(startShip, startShip + direct, _changeTime / ChangeDuration),
                 transform.position.y, transform.position.z);
 
             yield return null;

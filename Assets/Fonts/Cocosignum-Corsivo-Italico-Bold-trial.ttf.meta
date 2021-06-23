@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 92358cd3a6ed0f24ca80966351124860
+guid: 17c0f6eaec21e4e498e490517340660b
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,8 +9,10 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Blancha
-  fallbackFontReferences: []
+  - Cocosignum Corsivo Italico
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 22df020a8e0433e44b489be1943687ac, type: 3}
+  - {fileID: 12800000, guid: 62ab910d49b9f5649985c75519a89b2c, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
