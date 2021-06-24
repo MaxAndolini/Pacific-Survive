@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ObstaclesSpawner : MonoBehaviour
 {
@@ -13,6 +15,12 @@ public class ObstaclesSpawner : MonoBehaviour
     private void Start()
     {
         Spawn();
+    }
+
+    private void OnDisable()
+    {
+        foreach (var o in _obs)
+            Destroy(o);
     }
 
     private void SpawnObstacle()
@@ -35,7 +43,7 @@ public class ObstaclesSpawner : MonoBehaviour
             if (obsObj != null)
             {
                 var emptyRandom = Random.Range(0, 100);
-                if (emptyRandom > 30)
+                if (emptyRandom > 35)
                 {
                     var position = obsObj.transform.position;
                     var temp = Instantiate(obsObj);
@@ -66,8 +74,7 @@ public class ObstaclesSpawner : MonoBehaviour
     {
         foreach (var o in _obs)
             Destroy(o);
-
-        _obs.Clear();
+        
         _lastObject = -1;
         Spawn();
     }
@@ -83,6 +90,8 @@ public class ObstaclesSpawner : MonoBehaviour
         {
             _startPos = -10f;
         }
+        
+        _obs.Clear();
 
         SpawnObstacle();
     }

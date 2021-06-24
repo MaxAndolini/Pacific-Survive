@@ -13,6 +13,12 @@ public class LifebuoySpawner : MonoBehaviour
         Spawn();
     }
 
+    private void OnDisable()
+    {
+        foreach (var l in _lb)
+            Destroy(l);
+    }
+
     private void SpawnLifebuoy()
     {
         var maxObject = Random.Range(0, 3);
@@ -41,7 +47,6 @@ public class LifebuoySpawner : MonoBehaviour
         foreach (var l in _lb)
             Destroy(l);
 
-        _lb.Clear();
         Spawn();
     }
 
@@ -56,6 +61,8 @@ public class LifebuoySpawner : MonoBehaviour
         {
             _startPos = -10f;
         }
+
+        _lb.Clear();
 
         SpawnLifebuoy();
     }

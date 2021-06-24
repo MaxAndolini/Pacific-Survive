@@ -29,7 +29,7 @@ public class ShipController : MonoBehaviour
             return;
         }
 
-#if UNITY_EDITOR
+#if UNITY_ANDROID
         if (!_fingerDown && Input.GetMouseButtonDown(0))
         {
             _start = Input.mousePosition;
@@ -38,10 +38,9 @@ public class ShipController : MonoBehaviour
 
         if (_fingerDown)
         {
-            if (Input.mousePosition.x <= _start.x - pixelDistance)
+            if (Input.mousePosition.x <= _start.x - pixelDistance) // Swipe Left
             {
                 _fingerDown = false;
-                Debug.Log("Swipe left");
 
                 var error = false;
                 if (Physics.Raycast(transform.position,
@@ -51,10 +50,9 @@ public class ShipController : MonoBehaviour
 
                 if (!error) StartCoroutine(Move(0));
             }
-            else if (Input.mousePosition.x >= _start.x + pixelDistance)
+            else if (Input.mousePosition.x >= _start.x + pixelDistance) // Swipe Right
             {
                 _fingerDown = false;
-                Debug.Log("Swipe right");
 
                 var error = false;
                 if (Physics.Raycast(transform.position,
@@ -69,40 +67,36 @@ public class ShipController : MonoBehaviour
         if (_fingerDown && Input.GetMouseButtonUp(0))
             _fingerDown = false;
 #else
-        if (!fingerDown && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (!_fingerDown && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            start = Input.GetTouch(0).position;
-            fingerDown = true;
+            _start = Input.GetTouch(0).position;
+            _fingerDown = true;
         }
 
-        if (fingerDown)
+        if (!_fingerDown) return;
+        if (Input.GetTouch(0).position.x <= _start.x - pixelDistance) // Swipe Left
         {
-            if (Input.GetTouch(0).position.x <= start.x - pixelDistance)
-            {
-                fingerDown = false;
-                Debug.Log("Swipe left");
+            _fingerDown = false;
 
-                var error = false;
-                if (Physics.Raycast(transform.position,
-                    -transform.right, out var hit, 5f))
-                    if (hit.transform.gameObject.CompareTag("Obstacle"))
-                        error = true;
+            var error = false;
+            if (Physics.Raycast(transform.position,
+                -transform.right, out var hit, 5f))
+                if (hit.transform.gameObject.CompareTag("Obstacle"))
+                    error = true;
 
-                if (!error) StartCoroutine(Move(0));
-            }
-            else if (Input.GetTouch(0).position.x >= start.x + pixelDistance)
-            {
-                fingerDown = false;
-                Debug.Log("Swipe right");
+            if (!error) StartCoroutine(Move(0));
+        }
+        else if (Input.GetTouch(0).position.x >= _start.x + pixelDistance) // Swipe Right
+        {
+            _fingerDown = false;
 
-                var error = false;
-                if (Physics.Raycast(transform.position,
-                    transform.right, out var hit, 5f))
-                    if (hit.transform.gameObject.CompareTag("Obstacle"))
-                        error = true;
+            var error = false;
+            if (Physics.Raycast(transform.position,
+                transform.right, out var hit, 5f))
+                if (hit.transform.gameObject.CompareTag("Obstacle"))
+                    error = true;
 
-                if (!error) StartCoroutine(Move(1));
-            }
+            if (!error) StartCoroutine(Move(1));
         }
 #endif
     }
@@ -170,8 +164,10 @@ public class ShipController : MonoBehaviour
         while (_changeTime < ChangeDuration)
         {
             _changeTime += Time.deltaTime;
-            transform.position = new Vector3(Mathf.Lerp(startShip, startShip + direct, _changeTime / ChangeDuration),
-                transform.position.y, transform.position.z);
+            var position = transform.position;
+            position = new Vector3(Mathf.Lerp(startShip, startShip + direct, _changeTime / ChangeDuration),
+                position.y, position.z);
+            transform.position = position;
 
             yield return null;
         }

@@ -36,7 +36,7 @@ public class LanguageManager : MonoBehaviour
         ChangeLanguage(_index);
     }
 
-    public void ChangeLanguage(int index)
+    private void ChangeLanguage(int index)
     {
         play.text = languages[index].Play;
         pause.text = languages[index].Pause;

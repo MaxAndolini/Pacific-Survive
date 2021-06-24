@@ -11,6 +11,16 @@ public class Top10 : MonoBehaviour
 
     private void Start()
     {
+        GetHighScore();
+    }
+
+    private void OnEnable()
+    {
+        GetHighScore();
+    }
+
+    public void GetHighScore()
+    {
         var top = DatabaseManager.Instance.GetHighScore(line);
         nth.text = line + ".";
         people.text = top[0];

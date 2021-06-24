@@ -64,6 +64,12 @@ public class GameManager : MonoBehaviour
         isPaused = false;
     }
 
+    public void SpecialTime()
+    {
+        Time.timeScale = 0.1f;
+        isPaused = true;
+    }
+
     public void MainMenu()
     {
         Restart();
@@ -79,10 +85,11 @@ public class GameManager : MonoBehaviour
 
     public void ReviveGame()
     {
-        var hitColliders = Physics.OverlapSphere(ship.transform.position, 70);
-        foreach (var hitCollider in hitColliders)
-            if (hitCollider.gameObject.CompareTag("Obstacle"))
-                Destroy(hitCollider.gameObject);
+        var objects = Physics.OverlapSphere(ship.transform.position, 70);
+        foreach (var obj in objects)
+            if (obj.gameObject.CompareTag("Obstacle"))
+                Destroy(obj.gameObject);
+
 
         DatabaseManager.Instance.Lifebuoy -= distance / 5;
         GUIManager.Instance.Lifebuoy(DatabaseManager.Instance.Lifebuoy);
@@ -92,26 +99,14 @@ public class GameManager : MonoBehaviour
 
     private void Restart()
     {
-        ship.transform.position = new Vector3(0, 0, 0);
         score = 0;
         distance = 0;
         GUIManager.Instance.Score(score);
         GUIManager.Instance.Distance(distance);
         Destroy(GameObject.FindGameObjectWithTag("Seas"));
-        var obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
-        foreach (var obs in obstacles)
-            Destroy(obs);
-
-        var lifebuoys = GameObject.FindGameObjectsWithTag("Lifebuoy");
-        foreach (var lf in lifebuoys)
-            Destroy(lf);
-
-        var people = GameObject.FindGameObjectsWithTag("People");
-        foreach (var pp in people)
-            Destroy(pp);
-
         Instantiate(seas);
         ship.GetComponent<ShipController>().ResetSpeed();
+        ship.transform.position = new Vector3(0, 0, -15);
     }
 
     public void ChangeSound()
@@ -119,7 +114,6 @@ public class GameManager : MonoBehaviour
         isSoundActive = !isSoundActive;
         GUIManager.Instance.Sound(isSoundActive);
         DatabaseManager.Instance.Sound = isSoundActive;
-        Debug.Log("Sound Active " + isSoundActive);
         if (isSoundActive) SoundManager.Instance.Play("SoundOn");
     }
 
@@ -128,7 +122,6 @@ public class GameManager : MonoBehaviour
         isVibrationActive = !isVibrationActive;
         GUIManager.Instance.Vibration(isVibrationActive);
         DatabaseManager.Instance.Vibration = isVibrationActive;
-        Debug.Log("Vibration Active " + isVibrationActive);
         SoundManager.Instance.Play("Click");
     }
 }
