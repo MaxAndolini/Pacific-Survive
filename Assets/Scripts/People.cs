@@ -6,18 +6,13 @@ public class People : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstacle") || other.gameObject.CompareTag("Lifebuoy") ||
             other.gameObject.CompareTag("People"))
-        {
-            Debug.Log("people col");
             Destroy(gameObject);
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Obstacle") || other.gameObject.CompareTag("Lifebuoy") ||
-            other.gameObject.CompareTag("People"))         {
-            Debug.Log("people trig");
+            other.gameObject.CompareTag("People"))
             Destroy(gameObject);
-        }
     }
 }
