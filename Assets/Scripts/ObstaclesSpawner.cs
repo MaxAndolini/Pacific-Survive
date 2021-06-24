@@ -38,8 +38,8 @@ public class ObstaclesSpawner : MonoBehaviour
                 if (emptyRandom > 30)
                 {
                     var position = obsObj.transform.position;
-                    var temp = Instantiate(obsObj,
-                        new Vector3(position.x, position.y, transform.position.z + _startPos), Quaternion.identity);
+                    var temp = Instantiate(obsObj);
+                    temp.transform.position = new Vector3(position.x, position.y, transform.position.z + _startPos);
                     _obs.Add(temp);
                 }
                 else

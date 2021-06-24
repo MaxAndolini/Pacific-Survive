@@ -8,6 +8,8 @@ public class SeaController : MonoBehaviour
         {
             transform.position += new Vector3(0, 0, transform.GetChild(0).GetComponent<Renderer>().bounds.size.z * 5);
             gameObject.GetComponent<ObstaclesSpawner>().RespawnObstacles();
+            gameObject.GetComponent<LifebuoySpawner>().RespawnLifebuoys();
+            gameObject.GetComponent<PeopleSpawner>().RespawnPeople();
         }
     }
 }
