@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ship
   - Obstacle
+  - Seas
+  - People
+  - Lifebuoy
   layers:
   - Default
   - TransparentFX
