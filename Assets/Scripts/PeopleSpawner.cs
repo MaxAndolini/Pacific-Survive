@@ -13,9 +13,15 @@ public class PeopleSpawner : MonoBehaviour
         Spawn();
     }
 
+    private void OnDisable()
+    {
+        foreach (var p in _pp)
+            Destroy(p);
+    }
+
     private void SpawnPeople()
     {
-        var maxObject = Random.Range(5, 25);
+        var maxObject = Random.Range(5, 10);
         for (var i = 0; i < maxObject; i++)
         {
             var randX = Random.Range(0, 3);
@@ -41,7 +47,6 @@ public class PeopleSpawner : MonoBehaviour
         foreach (var p in _pp)
             Destroy(p);
 
-        _pp.Clear();
         Spawn();
     }
 
@@ -56,6 +61,8 @@ public class PeopleSpawner : MonoBehaviour
         {
             _startPos = -10f;
         }
+
+        _pp.Clear();
 
         SpawnPeople();
     }

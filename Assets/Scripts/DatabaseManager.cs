@@ -79,7 +79,7 @@ public class DatabaseManager : MonoBehaviour
 
                 PlayerPrefs.SetInt(DPeople + i, score);
                 PlayerPrefs.SetInt(DDistance + i, distance);
-                PlayerPrefs.SetString(DTime + i, DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"));
+                PlayerPrefs.SetString(DTime + i, DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
                 return true;
             }
 

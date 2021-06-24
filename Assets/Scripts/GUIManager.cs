@@ -52,11 +52,6 @@ public class GUIManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-    }
-
-
     private void Update()
     {
         if (activeScreen == Screen.InGame) Distance(GameManager.Instance.distance);
@@ -70,7 +65,7 @@ public class GUIManager : MonoBehaviour
         pause.SetActive(false);
         fail.SetActive(false);
         lastScreen = 2;
-        GameManager.Instance.PauseGame();
+        GameManager.Instance.SpecialTime();
     }
 
     public void ShowPause()
@@ -207,5 +202,14 @@ public class GUIManager : MonoBehaviour
     public void Distance(int number)
     {
         distance.text = number.ToString("D12");
+    }
+
+    public void Clean()
+    {
+        DatabaseManager.Instance.DeleteAll();
+        for (var i = 0; i < top10.transform.childCount; i++)
+            if (top10.transform.GetChild(i).name != "Clean" &&
+                top10.transform.GetChild(i).GetComponent<Top10>() != null)
+                top10.transform.GetChild(i).GetComponent<Top10>().GetHighScore();
     }
 }
